@@ -1,6 +1,8 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 <div class="page-content"> 
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -23,7 +25,7 @@
 								<div class="card">
 									<div class="card-body">
 										<div class="d-flex flex-column align-items-center text-center">
-											<img src="{{ asset('adminbackend/assets/images/avatars/avatar-2.png') }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+											<img src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo):url('upload/no_image.jpg') }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 											<div class="mt-3">
 												<h4>{{ Auth::user()->name }}</h4>
 												<p class="text-secondary mb-1">{{ Auth::user()->email }}</p>
@@ -50,10 +52,18 @@
 									<div class="card-body">
 										<div class="row mb-3">
 											<div class="col-sm-3">
+												<h6 class="mb-0">UserName</h6>
+											</div>
+											<div class="col-sm-9 text-secondary">
+												<input type="text" class="form-control" value="{{ Auth::user()->username }}" disabled />
+											</div>
+										</div>
+										<div class="row mb-3">
+											<div class="col-sm-3">
 												<h6 class="mb-0">Full Name</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" value="John Doe" />
+												<input type="text" class="form-control" value="{{ Auth::user()->name }}"  />
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -61,7 +71,7 @@
 												<h6 class="mb-0">Email</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" value="john@example.com" />
+												<input type="text" class="form-control" value="{{ Auth::user()->email}}" />
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -69,15 +79,7 @@
 												<h6 class="mb-0">Phone</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" value="(239) 816-9029" />
-											</div>
-										</div>
-										<div class="row mb-3">
-											<div class="col-sm-3">
-												<h6 class="mb-0">Mobile</h6>
-											</div>
-											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" value="(320) 380-4539" />
+												<input type="text" class="form-control" value="{{ Auth::user()->phone }}" />
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -85,9 +87,25 @@
 												<h6 class="mb-0">Address</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" value="Bay Area, San Francisco, CA" />
+												<input type="text" class="form-control" value="{{ Auth::user()->address }}" />
 											</div>
 										</div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Photo</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="file" class="form-control" id="image"  />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0"></h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <img id="showImage" src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo):url('upload/no_image.jpg') }}" alt="Admin"  style=" width:100px; heigth: 100px;">
+                                            </div>
+                                        </div>
 										<div class="row">
 											<div class="col-sm-3"></div>
 											<div class="col-sm-9 text-secondary">
@@ -101,5 +119,18 @@
 					</div>
 				</div>
 			</div>
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#image').change(function(e){
+                        var reader = new FileReader();
+                        reader.onload = function(e){
+                            $('#showImage').attr('src',e.target.result);
+                        }
+                        reader.readAsDataURL(e.target.files['0']);
+                    });
+                });
+            </script>
+
 
 @endsection
