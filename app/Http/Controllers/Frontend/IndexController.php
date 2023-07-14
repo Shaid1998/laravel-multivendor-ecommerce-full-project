@@ -19,10 +19,10 @@ class IndexController extends Controller
         $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->limit(5)->get();
 
         $skip_category_2 = Category::skip(2)->first();
-        $skip_product_2 = Product::where('status',1)->where('category_id',$skip_category_2->id)->orderBy('id','DESC')->limit(5)->get();
+        $skip_product_2 = Product::where('status',1)->where('category_id',$skip_category_2->id  ?? 'None')->orderBy('id','DESC')->limit(5)->get();
 
         $skip_category_7 = Category::skip(7)->first();
-        $skip_product_7 = Product::where('status',1)->where('category_id',$skip_category_7->id)->orderBy('id','DESC')->limit(5)->get();
+        $skip_product_7 = Product::where('status',1)->where('category_id',$skip_category_7->id  ?? 'None')->orderBy('id','DESC')->limit(5)->get();
 
         $hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();
 

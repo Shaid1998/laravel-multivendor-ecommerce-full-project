@@ -10,10 +10,10 @@
     <meta charset="utf-8" /> 
     <title> @yield('title')</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="title" content="{{ $seo->meta_title }}" />
-    <meta name="author" content="{{ $seo->meta_author }}" />
-    <meta name="keywords" content="{{ $seo->meta_keyword }}" />
-    <meta name="description" content="{{ $seo->meta_description }}" />
+    <meta name="title" content="{{ $seo->meta_title  ?? 'None'}}" />
+    <meta name="author" content="{{ $seo->meta_author  ?? 'None'}}" />
+    <meta name="keywords" content="{{ $seo->meta_keyword  ?? 'None'}}" />
+    <meta name="description" content="{{ $seo->meta_description  ?? 'None'}}" />
  
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

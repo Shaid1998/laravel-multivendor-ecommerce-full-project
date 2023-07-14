@@ -176,7 +176,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
    <section class="product-tabs section-padding position-relative">
             <div class="container">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>{{ $skip_category_2->category_name }} Category </h3>
+                    <h3>{{ $skip_category_2->category_name  ?? 'None'}} Category </h3>
                    
                 </div>
                 <!--End nav-tabs-->
@@ -300,7 +300,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
    <section class="product-tabs section-padding position-relative">
             <div class="container">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>{{ $skip_category_7->category_name }} Category </h3>
+                    <h3>{{ $skip_category_7->category_name  ?? 'None'}} Category </h3>
                    
                 </div>
                 <!--End nav-tabs-->
